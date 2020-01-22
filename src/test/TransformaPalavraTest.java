@@ -97,6 +97,59 @@ public class TransformaPalavraTest {
 		assertEquals("Baaa", resultado);
 	}
 	
+	// Testes v3
+
+	@Test
+	public void deveEncriptarAPalavraBanana() {
+
+		String banana = palavras.getBanana();
+
+		String resultado = service.encriptar(banana);
+
+		assertEquals("«G¿yYaÃ\fèb²³ø_", resultado);
+	}
+	
+	@Test
+	public void deveDescriptarAPalavraBanana() {
+
+		String banana = "«G¿yYaÃ\fèb²³ø_";
+
+		String resultado = service.descriptar(banana);
+
+		assertEquals("Banana", resultado);
+	}
+	
+	@Test
+	public void deveEncriptarAPalavraDevInseridaPeloUsuario() {
+		
+		PalavrasService service1 = Mockito.spy(service);
+
+		Mockito.doReturn("Dev").when(service1).encontraPalavra();
+
+		String novaPalavra = service1.encontraPalavra();
+
+
+		String resultado = service.encriptar(novaPalavra);
+
+		assertEquals("°Ýõ#ÃÖÝ.%@'Æ)=Ä", resultado);
+	}
+	
+	@Test
+	public void deveDescriptarAPalavraDevInseridaPeloUsuario() {
+
+		PalavrasService service1 = Mockito.spy(service);
+
+		Mockito.doReturn("°Ýõ#ÃÖÝ.%@'Æ)=Ä").when(service1).encontraPalavra();
+
+		String novaPalavra = service1.encontraPalavra();
+
+
+		String resultado = service.descriptar(novaPalavra);
+
+
+		assertEquals("Dev", resultado);
+	}
+	
 	
 
 }
